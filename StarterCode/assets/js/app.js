@@ -20,3 +20,37 @@ var svg = d3.select(".chart")
 
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  // Import Data
+d3.csv("data.csv").then(function(healthData) {
+
+    // Step 1: Parse Data/Cast as numbers
+    // ==============================
+    healthData.forEach(function(data) {
+      data.poverty = +data.poverty;
+      data.smokes = +data.smokes;
+    });
+
+    // Step 2: Create scale functions
+    // ==============================
+    var xLinearScale = d3.scaleLinear()
+      .domain([0, d3.max(healthData, d => d.poverty)])
+      .range([0, width]);
+
+    var yLinearScale = d3.scaleLinear()
+      .domain([0, d3.max(hairData, d => d.smokes)])
+      .range([height, 0]);
+
+    // Step 3: Create axis functions
+    // ==============================
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
+
+    // Step 4: Append Axes to the chart
+    // ==============================
+    chartGroup.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(bottomAxis);
+
+    chartGroup.append("g")
+      .call(leftAxis);
