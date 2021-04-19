@@ -12,6 +12,17 @@ var margin = {
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
+var circRadius;
+function crGet() {
+  if (width <= 530) {
+    circRadius = 5;
+  }
+  else {
+    circRadius = 10;
+  }
+}
+crGet();
+
 // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
 var svg = d3.select("#scatter")
   .append("svg")
@@ -71,14 +82,24 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     // .attr("fill", "pink")
     // .attr("opacity", ".5");
 
+    // chartGroup.selectAll("circle")
+    // .data(healthData)
+    // .enter()
+    // .append("text")
+    // .text(d => d.abbr)
+    // .attr("dx", d => xLinearScale(d.poverty))
+    // .attr("dy", d => yLinearScale(d.smokes))
+    // .attr("font-size", 5)
+    // .attr("class", "stateText");
+
     chartGroup.selectAll("circle")
     .data(healthData)
     .enter()
     .append("text")
     .text(d => d.abbr)
     .attr("dx", d => xLinearScale(d.poverty))
-    .attr("dy", d => yLinearScale(d.smokes))
-    .attr("font-size", 5)
+    .attr("dy", d => yLinearScale(d.smokes) + circRadius / 2.5)
+    .attr("font-size", circRadius)
     .attr("class", "stateText");
 
 
