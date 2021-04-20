@@ -27,7 +27,8 @@ crGet();
 var svg = d3.select("#scatter")
   .append("svg")
   .attr("width", svgWidth)
-  .attr("height", svgHeight);
+  .attr("height", svgHeight)
+  .attr("class", "chart");
 
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -77,10 +78,10 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     .append("circle")
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.smokes))
-    .attr("r", 20)
-    .attr("class", "stateCircle");
-    // .attr("fill", "pink")
-    // .attr("opacity", ".5");
+    .attr("r", circRadius)
+    .attr("class", function(d) {
+      return "stateCircle " + d.abbr});
+    
 
     // chartGroup.selectAll("circle")
     // .data(healthData)
@@ -92,7 +93,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     // .attr("font-size", 5)
     // .attr("class", "stateText");
 
-    chartGroup.selectAll("circle")
+    chartGroup.selectAll("text")
     .data(healthData)
     .enter()
     .append("text")
@@ -101,6 +102,22 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     .attr("dy", d => yLinearScale(d.smokes) + circRadius / 2.5)
     .attr("font-size", circRadius)
     .attr("class", "stateText");
+
+    // d3.select("#scatter")
+    // .append("svg")
+    // .attr("width", svgWidth)
+    // .attr("height", svgHeight)
+    // .append("g")
+    // .attr("transform", `translate(${margin.left}, ${margin.top})`)
+    // .selectAll("circle")
+    // .data(healthData)
+    // .enter()
+    // .append("text")
+    // .text(d => d.abbr)
+    // .attr("dx", d => xLinearScale(d.poverty))
+    // .attr("dy", d => yLinearScale(d.smokes) + circRadius / 2.5)
+    // .attr("font-size", circRadius)
+    // .attr("class", "stateText");
 
 
 
