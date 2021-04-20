@@ -83,16 +83,6 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
       return "stateCircle " + d.abbr});
     
 
-    // chartGroup.selectAll("circle")
-    // .data(healthData)
-    // .enter()
-    // .append("text")
-    // .text(d => d.abbr)
-    // .attr("dx", d => xLinearScale(d.poverty))
-    // .attr("dy", d => yLinearScale(d.smokes))
-    // .attr("font-size", 5)
-    // .attr("class", "stateText");
-
     chartGroup.selectAll()
     .data(healthData)
     .enter()
@@ -103,25 +93,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     .attr("font-size", circRadius)
     .attr("class", "stateText");
 
-    // d3.select("#scatter")
-    // .append("svg")
-    // .attr("width", svgWidth)
-    // .attr("height", svgHeight)
-    // .append("g")
-    // .attr("transform", `translate(${margin.left}, ${margin.top})`)
-    // .selectAll("circle")
-    // .data(healthData)
-    // .enter()
-    // .append("text")
-    // .text(d => d.abbr)
-    // .attr("dx", d => xLinearScale(d.poverty))
-    // .attr("dy", d => yLinearScale(d.smokes) + circRadius / 2.5)
-    // .attr("font-size", circRadius)
-    // .attr("class", "stateText");
-
-
-
-
+    
     // Create axes labels
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
