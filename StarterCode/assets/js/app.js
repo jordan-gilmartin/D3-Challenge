@@ -1,6 +1,6 @@
 // @TODO: YOUR CODE HERE!
-var svgWidth = 960;
-var svgHeight = 500;
+var svgWidth = 1160;
+var svgHeight = 700;
 
 var margin = {
   top: 20,
@@ -93,7 +93,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     // .attr("font-size", 5)
     // .attr("class", "stateText");
 
-    chartGroup.selectAll("text")
+    chartGroup.selectAll()
     .data(healthData)
     .enter()
     .append("text")
